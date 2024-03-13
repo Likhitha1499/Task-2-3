@@ -10,14 +10,14 @@ filtered_data <- subset(Homo_sapiens.gene_info, !grepl("\\|", Homo_sapiens.gene_
 # Count the number of genes per chromosome
 gene_count <- as.data.frame(table(filtered_data$chromosome))
 
-# Rename the columns appropriately
+# Rename the columns
 names(gene_count) <- c("Chromosome", "GeneCount")
 
 # Convert the chromosome column to a factor and specify the order
 chromosome_levels <- c(as.character(1:22), "X", "Y", "MT", "Un")
 gene_count$Chromosome <- factor(gene_count$Chromosome, levels = chromosome_levels)
 
-# Create the plot using ggplot2
+# Create a plot using ggplot2
 plot <- ggplot(gene_counts, aes(x = Chromosome, y = GeneCount)) +
   geom_bar(stat = "identity", fill = "grey") +
   theme_minimal() +
