@@ -1,0 +1,42 @@
+TASK-2
+ wget https://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa -O NC_000913.faa
+ total_amino_acids=$(grep -v "^>" NC_000913.faa | tr -d "\n" | wc -m)
+total_proteins=$(grep "^>" NC_000913.faa | wc -l)
+average_length=$(echo "scale=2; $total_amino_acids / $total_proteins" | bc)
+echo "The average protein length is: $average_length"
+The average protein length is: 316.85
+
+
+
+TASK-3
+# Import the dataset into R
+library(ggplot2)
+
+# Filter the rows
+filtered_data <- subset(Homo_sapiens.gene_info, !grepl("\\|", Homo_sapiens.gene_info$chromosome))
+
+# Count the number of genes per chromosome
+gene_count <- as.data.frame(table(filtered_data$chromosome))
+
+# Rename the columns appropriately
+names(gene_count) <- c("Chromosome", "GeneCount")
+
+# Convert the chromosome column to a factor and specify the order
+chromosome_levels <- c(as.character(1:22), "X", "Y", "MT", "Un")
+gene_count$Chromosome <- factor(gene_count$Chromosome, levels = chromosome_levels)
+
+# Create the plot using ggplot2
+plot <- ggplot(gene_counts, aes(x = Chromosome, y = GeneCount)) +
+  geom_bar(stat = "identity", fill = "grey") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Number of genes in each chromosome",
+       x = "Chromosome",
+       y = "Gene count")
+
+# View the plot
+print(plot)
+
+# Save the plot to a PDF file
+ggsave("genes_per_chromosome.pdf", plot, device = "pdf", width = 14, height = 6)
+
