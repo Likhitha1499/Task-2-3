@@ -1,4 +1,4 @@
-TASK -2
+(1)CALCULATING AVERAGE LENGTH OF A PROTEIN
 
 #Download the FASTA file
  wget https://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa -O NC_000913.faa
@@ -18,7 +18,7 @@ The average protein length is: 316.85
 
 
 
-TASK-3
+(2) DRAW A PLOT OF NUMBER OF GENES PER CHROMOSOME IN HUMAN GENOMES BY USING "R"
 
 # Import the dataset into R
 #Load the required libraries
